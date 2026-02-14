@@ -1,4 +1,4 @@
-import { redis } from '../db/redis.js'
+import { redis } from '../lib/redis.js'
 
 export type Timeframe = '1D' | '1W' | '1M' | '3M' | 'YTD' | '1Y'
 export type ColorMetric = 'changePercent' | 'peRatio' | 'rsi' | 'ivRank' | 'marketCap'

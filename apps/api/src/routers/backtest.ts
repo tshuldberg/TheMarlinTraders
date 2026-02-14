@@ -9,9 +9,14 @@
 import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
 import { router, protectedProcedure } from '../trpc.js'
-import { VectorizedBacktester } from '@marlin/backtesting/vectorized'
-import { generateMockBars } from '@marlin/backtesting/data'
-import type { BacktestStrategy, BacktestResult, Signal, OpenPosition } from '@marlin/backtesting/vectorized'
+import { VectorizedBacktester } from '../../../../services/backtesting/src/vectorized/index.js'
+import { generateMockBars } from '../../../../services/backtesting/src/data/index.js'
+import type {
+  BacktestStrategy,
+  BacktestResult,
+  Signal,
+  OpenPosition,
+} from '../../../../services/backtesting/src/vectorized/index.js'
 import type { OHLCV, Timeframe } from '@marlin/shared'
 
 // ── Schemas ───────────────────────────────────────────────────────────────

@@ -287,7 +287,7 @@ function polygonQuoteToContract(
 
   const bid = quote.last_quote?.bid ?? 0
   const ask = quote.last_quote?.ask ?? 0
-  const mid = (bid + ask) / 2 || quote.last_quote?.midpoint ?? 0
+  const mid = (bid + ask) / 2 || (quote.last_quote?.midpoint ?? 0)
   const last = quote.day?.close ?? mid
   const volume = quote.day?.volume ?? 0
   const openInterest = quote.open_interest ?? 0
