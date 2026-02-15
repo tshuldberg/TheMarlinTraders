@@ -8,7 +8,7 @@
 
 import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
-import { router, protectedProcedure } from '../trpc.js'
+import { router, protectedProcedure, publicProcedure } from '../trpc.js'
 import { VectorizedBacktester } from '../../../../services/backtesting/src/vectorized/index.js'
 import { generateMockBars } from '../../../../services/backtesting/src/data/index.js'
 import type {
@@ -201,7 +201,7 @@ function calculateRSI(bars: OHLCV[], endIndex: number, period: number): number {
 
 export const backtestRouter = router({
   /** Run a new backtest */
-  run: protectedProcedure
+  run: publicProcedure
     .input(RunBacktestSchema)
     .mutation(async ({ ctx, input }) => {
       const { strategy: strategyInput, config } = input
@@ -240,7 +240,7 @@ export const backtestRouter = router({
       const id = crypto.randomUUID()
       backtestStore.set(id, {
         id,
-        userId: ctx.userId,
+        userId: ctx.userId ?? 'anonymous',
         strategyType: strategyInput.type,
         strategyParams: strategyInput.params,
         symbol: config.symbol,

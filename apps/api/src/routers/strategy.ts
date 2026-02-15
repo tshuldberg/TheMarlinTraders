@@ -6,7 +6,7 @@ import { strategies, strategyRuns } from '../db/schema/strategies.js'
 import {
   StrategyLanguageSchema,
   StrategyParameterSchema,
-  STRATEGY_TEMPLATES,
+  ALGO_STRATEGY_TEMPLATES,
 } from '@marlin/shared'
 
 // ── Input Schemas ──────────────────────────────────────────────────────────
@@ -149,10 +149,10 @@ export const strategyRouter = router({
     }),
 
   getTemplates: publicProcedure.query(() => {
-    return STRATEGY_TEMPLATES
+    return ALGO_STRATEGY_TEMPLATES
   }),
 
-  validate: protectedProcedure
+  validate: publicProcedure
     .input(ValidateCodeSchema)
     .mutation(({ input }) => {
       const errors: { line: number; message: string }[] = []
