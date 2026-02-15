@@ -43,11 +43,15 @@ const ValidateCodeSchema = z.object({
 // ── Router ─────────────────────────────────────────────────────────────────
 
 export const strategyRouter = router({
-  list: protectedProcedure
+  list: publicProcedure
     .input(ListStrategiesSchema)
     .query(async ({ ctx, input }) => {
       const limit = input?.limit ?? 50
       const offset = input?.offset ?? 0
+
+      if (!ctx.userId) {
+        return []
+      }
 
       return db
         .select()

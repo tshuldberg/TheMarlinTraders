@@ -541,6 +541,32 @@ Phase 3 code has been written across all 8 sprint groups (23-38) but remains in 
     - `packages/shared/src/index.ts`
   - Full monorepo typecheck still fails due broad pre-existing strict-indexing issues concentrated in indicator/chart/UI code.
 
+### 2026-02-15: Type-Sweep Tranche + Browser QA (Round 2)
+- Performed a focused strict-indexing type-fix tranche in shared indicators:
+  - `packages/shared/src/indicators/trend/supertrend.ts`
+  - `packages/shared/src/indicators/complex/adx.ts`
+  - `packages/shared/src/indicators/extended/zigzag.ts`
+  - `packages/shared/src/indicators/trend/sar.ts`
+  - `packages/shared/src/indicators/additional/ultimate-oscillator.ts`
+  - `packages/shared/src/indicators/additional/klinger.ts`
+  - `packages/shared/src/indicators/additional/choppiness.ts`
+  - `packages/shared/src/indicators/additional/volume-profile.ts`
+  - `packages/shared/src/indicators/volatility/atr.ts`
+  - `packages/shared/src/indicators/extended/wad.ts`
+  - `packages/shared/src/indicators/extended/ppo.ts`
+  - `packages/shared/src/indicators/extended/kst.ts`
+  - `packages/shared/src/indicators/volume/obv.ts`
+- Typecheck impact:
+  - `@marlin/shared` errors reduced from **401 -> 198**.
+  - Workspace `pnpm typecheck` errors reduced from **802 -> 396** in this session.
+- Ran headed browser QA via Playwright CLI across key flows:
+  - Home -> Settings -> Home, plus menu-driven transitions through Chart, Scanner, Strategy, Chat, News, and back Home.
+  - Verified global nav affordance exists across tested routes and allows return navigation.
+  - Verified chart renders canvas data state without "Failed to load chart data" banner.
+  - Verified scanner/news pages load without load-failure banners in tested flow.
+- Fixed QA-discovered strategy console noise for signed-out users:
+  - `apps/api/src/routers/strategy.ts` `list` changed from protected to public-with-guard (`[]` when unauthenticated), eliminating repeated 401 console errors during strategy page load.
+
 ---
 
 ## Next Steps — Phase 3 Completion
